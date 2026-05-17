@@ -7,7 +7,19 @@ function getSavedSeconds() {
 let remainingSeconds = getSavedSeconds();
 let intervalId = null;
 
-window.addEventListener("DOMContentLoaded", updateDisplay);
+function updateCurrentTime() {
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2, "0");
+  const m = String(now.getMinutes()).padStart(2, "0");
+  const s = String(now.getSeconds()).padStart(2, "0");
+  document.getElementById("currentTime").textContent = `${h}:${m}:${s}`;
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  updateDisplay();
+  updateCurrentTime();
+  setInterval(updateCurrentTime, 1000);
+});
 
 function formatTime(seconds) {
   const m = String(Math.floor(seconds / 60)).padStart(2, "0");
